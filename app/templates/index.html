@@ -6,16 +6,20 @@
     <div class="container">
         <h1 class="mb-4">Latest Posts</h1>
         {% for post in posts %}
-            <div class="card mb-3">
-                <div class="card-body">
-                    <h5 class="card-title">{{ post.title }}</h5>
-                    <h6 class="card-subtitle text-muted">By {{ post.author.username }} on {{ post.date_posted.strftime('%Y-%m-%d') }}</h6>
-                    <p class="card-text mt-2">{{ post.content[:200] }}...</p>
-                    <!-- <a href="{{ url_for('post', post_id=post.id) }}" class="btn btn-primary">Read More</a> -->
-                </div>
+        <div class="card mb-3">
+            <div class="card-body">
+                <h5 class="card-title">{{ post.title }}</h5>
+                <h6 class="card-subtitle text-muted">
+                    By {{ post.author }} on {{ post.date_posted }}
+                </h6>
+                <p class="card-text mt-2">
+                    {{ post.content[:200] }}...
+                </p>
+                <a href="{{ url_for('main.post_detail', post_id=post.id) }}" class="btn btn-primary">Đọc tiếp</a>
             </div>
-        {% else %}
-            <p>No posts available.</p>
-        {% endfor %}
+        </div>
+    {% else %}
+        <p>Không có bài viết nào.</p>
+    {% endfor %}
     </div>
 {% endblock %}
