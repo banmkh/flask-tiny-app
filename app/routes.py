@@ -67,7 +67,7 @@ def new_post():
         if not title or not content:
             flash("Tiêu đề và nội dung không được để trống!", "danger")
         else:
-            add_post(title, content, current_user.id)  # ✅ Gọi add_post từ db
+            add_post(title, content, current_user.id)  #Gọi add_post từ db
             flash("Bài viết đã được thêm thành công!", "success")
             return redirect(url_for("main.home"))
     return render_template("new_post.html", current_user=current_user)
