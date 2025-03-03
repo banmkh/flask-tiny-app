@@ -17,7 +17,7 @@ def create_app():
     @login_manager.user_loader
     def load_user(user_id):
         user =  get_user_by_id(user_id)
-        return User(user['id'],user['username'],user['email'],user['is_admin'])
+        return User(user['id'],user['username'],user['email'],user['is_admin'],user['is_ban'])
 
     from app.routes import main
     app.register_blueprint(main)

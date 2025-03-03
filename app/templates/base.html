@@ -27,6 +27,9 @@
                 </ul>
                 <ul class="navbar-nav">
                     {% if current_user.is_authenticated %}
+                        {% if current_user.is_admin %}
+                            <li class = "nav-item"> <a class="nav-link btn btn-outline-light mx-2" href="{{ url_for('main.admin_users') }}">Quản lý user</a></li>
+                        {% endif %}
                         <li class="nav-item"><a class="nav-link btn btn-outline-light mx-2" href="{{ url_for('main.logout') }}">Logout</a></li>
                     {% else %}
                         <li class="nav-item"><a class="nav-link btn btn-outline-light mx-2" href="{{ url_for('main.login') }}">Login</a></li>
@@ -38,16 +41,6 @@
     </nav>
 
     <div class="container mt-4">
-        {% with messages = get_flashed_messages(with_categories=true) %}
-            {% if messages %}
-                {% for category, message in messages %}
-                    <div class="alert alert-{{ category }} alert-dismissible fade show shadow auto-dismiss" role="alert">
-                        {{ message }}
-                        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-                    </div>
-                {% endfor %}
-            {% endif %}
-        {% endwith %}
         {% block content %}{% endblock %}
     </div>
 

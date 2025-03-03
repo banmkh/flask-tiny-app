@@ -1,8 +1,74 @@
 {% extends "base.html" %}
 
 {% block content %}
-    <div class="container">
-        <h1>Giới thiệu</h1>
-        <p>Chào mừng bạn đến với Flask Tiny App! Đây là blog cá nhân giúp bạn quản lý bài viết dễ dàng.</p>
-    </div>
+    <div class="container" style="align-items: center;">
+        <h1 style="text-align: center;">Quản lý User</h1>
+        <form action="{{url_for('main.toggle_ban')}}" method="POST">
+            <div class="container_ad_usr">
+                <div class="ql_usr_left">
+                    <h2>User chưa bị cấm</h2>
+                    <table class="table">
+                        <thead>
+                            <tr>
+                                <th>ID</th>
+                                <th>Username</th>
+                                <th>Email</th>
+                                <th>Cấm?</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for user in users_is_not_ban %}
+                            <tr>
+                                <td name = "user_id" >{{ user.id }}</td>
+                                <td>{{ user.username }}</td>
+                                <td>{{ user.email }}</td>
+                                <td>
+                                    <input type="checkbox" name = "ban_user" class="toggle-ban" value="{{ user.id }}">
+                                </td>
+                            {% else %}
+                            <tr>
+                                <td colspan="4" class="text-center">Không có user nào.</td>
+                            </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+                <div class = "ql_usr_right">
+                    <h2>User đã bị cấm</h2>
+                    <table class="table">
+                        <thead>
+                            <tr>
+                                <th>ID</th>
+                                <th>Username</th>
+                                <th>Email</th>
+                                <th>Bỏ cấm?</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for user in users_is_ban %}
+                            <tr>
+                                <td>{{ user.id }}</td>
+                                <td>{{ user.username }}</td>
+                                <td>{{ user.email }}</td>
+                                <td>
+                                    <input type="checkbox" name = "un_ban_user" class="toggle-ban" value="{{ user.id }}">
+                                </td>
+                            {% else %}
+                            <tr>
+                                <td colspan="4" class="text-center">Không có user nào.</td>
+                            </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            <div class="text-center mt-4">
+                <a href="{{ url_for('main.home') }}" class="btn btn-secondary" style="justify-content:center;align-items: center;">Quay lại</a>
+                <button type="submit" class="btn btn-warning">
+                    Submit
+                </button>
+        </div>
+        </form>
+
+    <script src="{{ url_for('static', filename='js/script.js') }}"></script>
 {% endblock %}

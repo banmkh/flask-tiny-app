@@ -33,6 +33,25 @@ body {
     border-color: #198754 !important;
     color: #fff !important;
 }
+.post-preview {
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    max-height: 3em; /* Điều chỉnh chiều cao để phù hợp với font-size */
+}
+.container_ad_usr{
+    flex: 1; /* Chia đều hai phần */
+    display: flex;
+    gap : 50px;
+    align-items: stretch;
+    justify-content: center;
+    font-size: 24px;
+    color: rgb(57, 35, 35);
+}
+
+
 #flash-container {
     position: fixed;
     bottom: 20px;
