@@ -1,3 +1,38 @@
+body {
+    font-size: 1.1rem;
+}
+.navbar {
+    padding: 1rem 0;
+}
+.navbar-brand {
+    font-size: 1.8rem;
+    font-weight: bold;
+}
+.nav-link {
+    font-size: 1.2rem;
+    padding: 0.5rem 1rem !important;
+}
+.btn-write-post {
+    font-size: 1.2rem;
+    padding: 0.5rem 1.5rem;
+    font-weight: 600;
+}
+.alert {
+    font-size: 1.2rem;
+    padding: 1rem 1.5rem;
+}
+.container {
+    max-width: 1200px;
+}     
+.nav-link.btn-outline-light:hover {
+    background-color: #fff !important;
+    color: #212529 !important;
+}
+.btn-write-post:hover {
+    background-color: #198754 !important;
+    border-color: #198754 !important;
+    color: #fff !important;
+}
 #flash-container {
     position: fixed;
     bottom: 20px;
@@ -20,3 +55,4 @@
 .alert-danger { background-color: #dc3545; color: white; }
 .alert-warning { background-color: #ffc107; color: black; }
 .alert-info { background-color: #17a2b8; color: white; }
+
