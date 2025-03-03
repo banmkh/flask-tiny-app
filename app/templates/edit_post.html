@@ -1,0 +1,32 @@
+{% extends "base.html" %}
+
+{% block title %}Chỉnh sửa bài viết - BlogApp{% endblock %}
+
+{% block content %}
+<div class="container">
+    <div class="card">
+        <div class="card-body">
+            <h1 class="card-title mb-4">Chỉnh sửa bài viết</h1>
+            
+            <form method="POST">
+                <div class="mb-3">
+                    <label for="title" class="form-label">Tiêu đề</label>
+                    <input type="text" class="form-control" id="title" name="title" value="{{ post.title }}" required>
+                </div>
+                <div class="mb-3">
+                    <label for="content" class="form-label">Nội dung</label>
+                    <textarea class="form-control" id="content" name="content" rows="10" required>{{ post.content }}</textarea>
+                </div>
+                <div class="mt-4">
+                    <button type="submit" class="btn btn-primary">
+                        <i class="fas fa-save"></i> Lưu thay đổi
+                    </button>
+                    <a href="{{ url_for('main.post_detail', post_id=post.id) }}" class="btn btn-secondary ms-2">
+                        <i class="fas fa-times"></i> Hủy
+                    </a>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+{% endblock %}

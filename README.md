@@ -4,8 +4,8 @@
     - Họ và tên: Đoàn Vũ Thiên Ban
     - Mã sinh viên: 22710261
  - Sinh viên 2:
-    - Họ và tên: 
-    - Mã sinh viên:
+    - Họ và tên: Phan Tấn Tài
+    - Mã sinh viên: 22686181
 ### 2. Mô tả project
 
 Flask Tiny App là một blog app nhỏ gọn, sử dụng Flask để xây dựng hệ thống quản lý bài viết với các chức năng chính:
