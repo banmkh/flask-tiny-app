@@ -24,9 +24,9 @@ def add_user(username,email,password):
 # kiểm tra xem email đã được sử dụng hay chưa
 def get_user_by_email(email):
     db = get_db()
-    user =  db.execute("SELECT * FROM users WHERE email = ?", (email,)).fetchone()
-    print(dict(user))
-    return dict(user) if user != None else None
+    user = db.execute("SELECT * FROM users WHERE email = ?", (email,)).fetchone()
+    # Remove the print statement and directly return the result
+    return dict(user) if user else None
 
 # kiểm tra xem tên user đã được sử dụng hay chưa
 def get_user_by_username(username):
