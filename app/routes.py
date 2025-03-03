@@ -5,10 +5,11 @@ from app.db import get_db,add_user,get_user_by_email,get_user_by_username,get_us
 main = Blueprint("main", __name__)
 
 class User(UserMixin):
-    def __init__(self, id, username, email):
+    def __init__(self, id, username, email,is_admin):
         self.id = id
         self.username = username
         self.email = email
+        self.is_admin = is_admin
 
     def get_id(self):
         return str(self.id)
@@ -31,9 +32,12 @@ def register():
 
         if get_user_by_email(email):
             flash('email đã tồn tại!',"danger")
+            redirect(url_for("register.html"))
         elif get_user_by_username(username):
             flash('username đã tồn tại!',"danger")
+            redirect(url_for("register.html"))
         else:
+            flash("Đăng ký thành công!", "success")
             add_user(username,email,password)
             return redirect(url_for("main.login"))
     return render_template("register.html",current_user = current_user)
@@ -46,7 +50,7 @@ def login():
         password = request.form["password"]
         user = get_user_by_email(email)
         if user and user["password"] == password:
-            login_user(User(user['id'],user["username"], user["email"]))
+            login_user(User(user['id'],user["username"], user["email"],user["is_admin"]))
             flash("Đăng nhập thành công!", "success")
             return redirect(url_for("main.home"))
         else:
@@ -67,7 +71,7 @@ def new_post():
         if not title or not content:
             flash("Tiêu đề và nội dung không được để trống!", "danger")
         else:
-            add_post(title, content, current_user.id)  # ✅ Gọi add_post() từ db.py
+            add_post(title, content, current_user.id)
             flash("Bài viết đã được thêm thành công!", "success")
             return redirect(url_for("main.home"))
     return render_template("new_post.html", current_user=current_user)
@@ -81,3 +85,21 @@ def post_detail(post_id):
         return redirect(url_for("main.home"))
 
     return render_template("post_detail.html", post=post)
+
+@main.route("/about")
+def about():
+    return render_template("about.html")
+
+@main.route("/contact")
+def contact():
+    return render_template("contact.html")
+
+@main.route("/admin/users")
+@login_required
+def admin_users():
+    if not current_user.is_authenticated or not current_user.is_admin:
+        flash("Bạn không có quyền truy cập!", "danger")
+        return redirect(url_for("main.home"))
+    db = get_db()
+    users = db.execute("SELECT id, username, email FROM users WHERE is_admin = 0").fetchall()
+    return render_template("admin_users.html", users=users)

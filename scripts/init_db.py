@@ -8,8 +8,12 @@ TABLES = {
             id INTEGER PRIMARY KEY AUTOINCREMENT,
             username TEXT UNIQUE NOT NULL,
             email TEXT UNIQUE NOT NULL,
-            password TEXT NOT NULL
+            password TEXT NOT NULL,
+            is_admin INTEGER DEFAULT 0
         );
+    """,
+    "add_more_feature": """
+        ALTER TABLE users ADD COLUMN is_admin INTEGER DEFAULT 0;
     """,
     "posts": """
         CREATE TABLE IF NOT EXISTS posts (

@@ -9,12 +9,12 @@
         <hr>
         <p>{{ post.content }}</p>
         <hr>
-        <!-- {% if current_user.is_authenticated and current_user.username == post.author %}
-            <a href="{{ url_for('main.new_post', post_id=post.id) }}" class="btn btn-warning">Edit</a>
+        {% if current_user.is_authenticated and current_user.username == post.author %}
+            <!-- <a href="{{ url_for('main.new_post', post_id=post.id) }}" class="btn btn-warning">Edit</a>
             <form action="{{ url_for('main.new_post', post_id=post.id) }}" method="POST" class="d-inline">
                 <button type="submit" class="btn btn-danger" onclick="return confirm('Are you sure?')">Delete</button>
-            </form>
-        {% endif %} -->
+            </form> -->
+        {% endif %}
         <a href="{{ url_for('main.home') }}" class="btn btn-secondary">Back to Home</a>
     </div>
 {% endblock %}
