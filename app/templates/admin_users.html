@@ -3,7 +3,7 @@
 {% block content %}
     <div class="container" style="align-items: center;">
         <h1 style="text-align: center;">Quản lý User</h1>
-        <form action="{{url_for('main.toggle_ban')}}" method="POST">
+        <form action="{{url_for('user_bp.toggle_ban')}}" method="POST">
             <div class="container_ad_usr">
                 <div class="ql_usr_left">
                     <h2>User chưa bị cấm</h2>
@@ -63,7 +63,7 @@
                 </div>
             </div>
             <div class="text-center mt-4">
-                <a href="{{ url_for('main.home') }}" class="btn btn-secondary" style="justify-content:center;align-items: center;">Quay lại</a>
+                <a href="{{ url_for('post_bp.home') }}" class="btn btn-secondary" style="justify-content:center;align-items: center;">Quay lại</a>
                 <button type="submit" class="btn btn-warning">
                     Submit
                 </button>

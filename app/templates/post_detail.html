@@ -11,15 +11,15 @@
             <p class="card-text mt-4">{{ post.content | replace('\n', '<br>') | safe }}</p>
             
             <div class="mt-3">
-                <a href="{{ url_for('main.home') }}" class="btn btn-secondary">
+                <a href="{{ url_for('post_bp.home') }}" class="btn btn-secondary">
                     <i class="fas fa-arrow-left"></i> Quay lại
                 </a>
                 
                 {% if current_user.is_authenticated and current_user.username == post.username %}
-                    <a href="{{ url_for('main.edit_post', post_id=post.id) }}" class="btn btn-primary ms-2">
+                    <a href="{{ url_for('post_bp.edit_post', post_id=post.id) }}" class="btn btn-primary ms-2">
                         <i class="fas fa-edit"></i> Chỉnh sửa
                     </a>
-                    <form action="{{ url_for('main.delete_post', post_id=post.id) }}" 
+                    <form action="{{ url_for('post_bp.delete_post', post_id=post.id) }}" 
                         method="POST" 
                         class="d-inline ms-2" 
                         onsubmit="return confirm('Bạn có chắc chắn muốn xóa bài viết này?');">
