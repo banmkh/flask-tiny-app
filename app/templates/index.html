@@ -13,22 +13,26 @@
                 <option value="8" {% if per_page == 8 %}selected{% endif %}>8</option>
             </select>
         </form>
-        {% for post in posts %}
-        <div class="card mb-3">
-            <div class="card-body">
-                <h5 class="card-title">{{ post.title }}</h5>
-                <h6 class="card-subtitle text-muted">
-                    By {{ post.username }} on {{ post.date_posted }}
-                </h6>
-                <p class="post-preview">
-                    {{ post.content|replace('\n', '<br>') | safe }}...
-                </p>
-                <a href="{{ url_for('post_bp.post_detail', post_id=post.id) }}" class="btn btn-primary">Đọc tiếp</a>
-            </div>
+        <div class="row">
+            {% for post in posts %}
+                <div class="col-md-6">
+                    <div class="card mb-3">
+                        <div class="card-body">
+                            <h5 class="card-title">{{ post.title }}</h5>
+                            <h6 class="card-subtitle text-muted">
+                                By {{ post.username }} on {{ post.date_posted }}
+                            </h6>
+                            <p class="post-preview">
+                                {{ post.content|replace('\n', '<br>') | safe }}...
+                            </p>
+                            <a href="{{ url_for('post_bp.post_detail', post_id=post.id) }}" class="btn btn-primary">Đọc tiếp</a>
+                        </div>
+                    </div>
+                </div>
+                {% else %}
+                    <p>Không có bài viết nào.</p>
+            {% endfor %}
         </div>
-        {% else %}
-            <p>Không có bài viết nào.</p>
-        {% endfor %}
 
         <nav aria-label="Page navigation">
             <ul class="pagination justify-content-center mt-4">

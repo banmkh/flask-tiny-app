@@ -1,6 +1,28 @@
 body {
-    font-size: 1.1rem;
+    background-color: #cfd1d2; /* Xám nhạt */
+    color: #333333; /* Xám đậm cho chữ */
 }
+.block-no-background {
+    background-color: #ffffff;
+    border-radius: 10px; /* Bo tròn góc */
+    border-color: #0056B3; 
+    padding: 20px; /* Khoảng cách bên trong */
+    margin: 10px auto; /* Canh giữa theo chiều ngang */
+    width: 80%; /* Chiếm 80% chiều ngang màn hình */
+    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1); /* Bóng đổ nhẹ */
+    border: 1px solid #d1d5d5e7; /* Viền nhẹ */
+}
+.mb-3{
+    border-radius: 10px;
+    border-color: #007BFF ;
+}
+.card-body{
+    border-radius: 10px;
+    border: 1px ;
+    overflow: hidden;
+    background-color: #F8F9FA ;
+}
+
 .navbar {
     padding: 1rem 0;
 }
@@ -95,5 +117,5 @@ body {
     display: none;
 }
 .hidden-checkbox:checked + .card-body {
-    background-color: #a0c4ff;
+    background-color: #a3c6fe;
 }

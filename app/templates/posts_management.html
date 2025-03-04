@@ -15,31 +15,35 @@
             <div name="hidden-div" style="display: flex; gap: 10px; align-items: center;margin-bottom: 15px;">
                 <button type="submit" class="btn btn-warning">Xóa</button>
                 <p id="count-display" style="margin: 0;">Số lượng đã chọn: 2</p> 
-            </div>            
-            {% for post in posts %}
-                <div class="card mb-3">
-                    <label>
-                        <input type="checkbox" name = "delete_post" class="hidden-checkbox" value="{{ post.id }}" onclick="updateCount()">
-                        <div class="card-body" style="display: flex;align-items: center;justify-content: space-between;gap: 10px;">
-                            <div class="container">
-                                <h5 class="card-title">{{ post.title }}</h5>
-                                <h6 class="card-subtitle text-muted">
-                                    By {{ post.username }} on {{ post.date_posted }}
-                                </h6>
-                                <p class="post-preview">
-                                    {{ post.content|replace('\n', '<br>') | safe }}...
-                                </p>
-                                <a href="{{ url_for('post_bp.post_detail', post_id=post.id) }}" class="btn btn-primary">Đọc tiếp</a>
-                                <a href="{{ url_for('post_bp.edit_post', post_id=post.id) }}" class="btn btn-primary ms-2">
-                                    <i class="fas fa-edit"></i> Chỉnh sửa
-                                </a>
-                            </div>
+            </div>  
+            <div class="row">
+                {% for post in posts %}
+                    <div class="col-md-6">
+                        <div class="card mb-3">
+                            <label>
+                                <input type="checkbox" name = "delete_post" class="hidden-checkbox" value="{{ post.id }}" onclick="updateCount()">
+                                <div class="card-body" style="display: flex;align-items: center;justify-content: space-between;gap: 10px;">
+                                    <div class="container">
+                                        <h5 class="card-title">{{ post.title }}</h5>
+                                        <h6 class="card-subtitle text-muted">
+                                            By {{ post.username }} on {{ post.date_posted }}
+                                        </h6>
+                                        <p class="post-preview">
+                                            {{ post.content|replace('\n', '<br>') | safe }}...
+                                        </p>
+                                        <a href="{{ url_for('post_bp.post_detail', post_id=post.id) }}" class="btn btn-primary">Đọc tiếp</a>
+                                        <a href="{{ url_for('post_bp.edit_post', post_id=post.id) }}" class="btn btn-primary ms-2">
+                                            <i class="fas fa-edit"></i> Chỉnh sửa
+                                        </a>
+                                    </div>
+                                </div>
+                            </label>
                         </div>
-                    </label>
-                </div>
-            {% else %}
-                <p>Không có bài viết nào.</p>
-            {% endfor %}
+                    </div>
+                {% else %}
+                    <p>Không có bài viết nào.</p>
+                {% endfor %}
+            </div>          
         </form>
         <!-- Phân trang -->
         <nav aria-label="Page navigation">
