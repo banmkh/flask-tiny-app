@@ -13,3 +13,13 @@ document.addEventListener("DOMContentLoaded", function() {
         }, 3000);
     }
 });
+
+function updateCount() {
+    const count = document.querySelectorAll('.hidden-checkbox:checked').length;
+    document.getElementById('count-display').innerText = `Số lượng đã chọn: ${count}`;
+    const modifiContainer = document.querySelector('[name="hidden-div"]');
+    modifiContainer.style.display = count > 0 ? "flex" : "none";
+}
+document.addEventListener("DOMContentLoaded", function () {
+    updateCount();
+});

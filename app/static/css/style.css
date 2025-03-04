@@ -75,3 +75,9 @@ body {
 .alert-warning { background-color: #ffc107; color: black; }
 .alert-info { background-color: #17a2b8; color: white; }
 
+.hidden-checkbox {
+    display: none;
+}
+.hidden-checkbox:checked + .card-body {
+    background-color: #a0c4ff;
+}
