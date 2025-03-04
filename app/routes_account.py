@@ -53,7 +53,8 @@ def login():
         user = get_user_by_email(email)
         if user and user["password"] == password:
             if user["is_ban"] == 1:
-                return redirect(url_for("user_bp.ban"))
+                flash("tài khoản của bạn đã bị cấm, vui lòng liên hệ admin để bỏ cấm",'danger')
+                return redirect(url_for("user_bp.contact",is_ban = 1))
             login_user(User(user['id'],user["username"], user["email"],user["is_admin"],user["is_ban"]))
             flash("Đăng nhập thành công!", "success")
             return redirect(url_for("post_bp.home"))
@@ -88,15 +89,6 @@ def admin_users():
     for i in users_is_ban:
         print(dict(i))
     return render_template("admin_users.html", users_is_not_ban = users_is_not_ban,users_is_ban = users_is_ban)
-
-# Chức năng thông báo khi tài khoản bị cấm
-@user_bp.route("/ban")
-def ban(is_ban = 0):
-    if is_ban == 1:
-        return render_template("ban.html")
-    else:
-        flash("Tài khoản của bạn không thuộc diện bị cấm","danger")
-        return redirect(url_for("post_bp.home"))
     
 # chức năng cấm, bỏ cấm tài khoản
 @user_bp.route("/admin/toggle-ban",methods = ["POST"])

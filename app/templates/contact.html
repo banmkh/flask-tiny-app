@@ -1,8 +1,46 @@
 {% extends "base.html" %}
 
 {% block content %}
-    <div class="container">
-        <h1>Liên hệ</h1>
-        <p>Nếu bạn có thắc mắc, vui lòng gửi email đến <strong>banmkh6@gmail.com</strong>.</p>
+<div class="container mt-5">
+    <div class="row justify-content-center">
+        <div class="col-md-6">
+            <div class="contact-container">
+                <h2>Liên Hệ</h2>
+                <p>Bạn có câu hỏi hay góp ý? Hãy gửi tin nhắn cho chúng tôi!</p>
+                <form>
+                    <div class="mb-3">
+                        <input type="email" class="form-control" placeholder="Enter a valid email address">
+                    </div>
+                    <div class="mb-3">
+                        <input type="text" class="form-control" placeholder="Enter your Name">
+                    </div>
+                    <button type="submit" class="btn btn-info w-100">Submit</button>
+                </form>
+            </div>
+        </div>
     </div>
+    <div class="row mt-4">
+        <div class="col-md-4 text-center">
+            <div class="info-section">
+                <div class="info-icon"></div>
+                <h5>ABOUT US</h5>
+                <p>GOOD BOY <br> HANDSOME</p>
+            </div>
+        </div>
+        <div class="col-md-4 text-center">
+            <div class="info-section">
+                <div class="info-icon"></div>
+                <h5>PHONE (LANDLINE)</h5>
+                <p>+84 123456789 <br> +84 987654321</p>
+            </div>
+        </div>
+        <div class="col-md-4 text-center">
+            <div class="info-section">
+                <div class="info-icon"></div>
+                <h5>OUR OFFICE LOCATION</h5>
+                <p>12 Nguyen Van Bao Street, Ward 4 <br> Go Vap District, Ho Chi Minh City</p>
+            </div>
+        </div>
+    </div>
+</div>
 {% endblock %}
