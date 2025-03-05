@@ -5,59 +5,22 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>{% block title %}Blog App{% endblock %}</title>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
-    <style>
-        body {
-            font-size: 1.1rem;
-        }
-        .navbar {
-            padding: 1rem 0;
-        }
-        .navbar-brand {
-            font-size: 1.8rem;
-            font-weight: bold;
-        }
-        .nav-link {
-            font-size: 1.2rem;
-            padding: 0.5rem 1rem !important;
-        }
-        .btn-write-post {
-            font-size: 1.2rem;
-            padding: 0.5rem 1.5rem;
-            font-weight: 600;
-        }
-        .alert {
-            font-size: 1.2rem;
-            padding: 1rem 1.5rem;
-        }
-        .container {
-            max-width: 1200px;
-        }
-        
-        .nav-link.btn-outline-light:hover {
-            background-color: #fff !important;
-            color: #212529 !important;
-        }
-        
-        .btn-write-post:hover {
-            background-color: #198754 !important;
-            border-color: #198754 !important;
-            color: #fff !important;
-        }
-    </style>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
 </head>
 <body>
+    
     <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
         <div class="container">
-            <a class="navbar-brand" href="{{ url_for('main.home') }}">BlogApp</a>
+            <a class="navbar-brand" href="{{ url_for('post_bp.home') }}">BlogApp</a>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
                 <span class="navbar-toggler-icon"></span>
             </button>
             <div class="collapse navbar-collapse" id="navbarNav">
                 <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-                    <li class="nav-item"><a class="nav-link" href="{{ url_for('main.home') }}">Home</a></li>
+                    <li class="nav-item"><a class="nav-link" href="{{ url_for('post_bp.home') }}">Home</a></li>
                     {% if current_user.is_authenticated %}
                         <li class="nav-item">
-                            <a href="{{ url_for('main.new_post') }}" class="nav-link btn btn-success text-white mx-2 btn-write-post">
+                            <a href="{{ url_for('post_bp.new_post') }}" class="nav-link btn btn-success text-white mx-2 btn-write-post">
                                 <i class="fas fa-plus"></i> Viết bài
                             </a>
                         </li>
@@ -65,45 +28,48 @@
                 </ul>
                 <ul class="navbar-nav">
                     {% if current_user.is_authenticated %}
-                        <li class="nav-item"><a class="nav-link btn btn-outline-light mx-2" href="{{ url_for('main.logout') }}">Logout</a></li>
+                    <li class = "nav-item"> <a class="nav-link btn btn-outline-light mx-2" href="{{ url_for('post_bp.posts_management') }}">Quản lý bài viết</a></li>
+                        {% if current_user.is_admin %}
+                            <li class = "nav-item"> <a class="nav-link btn btn-outline-light mx-2" href="{{ url_for('user_bp.admin_users') }}">Quản lý user</a></li>
+                        {% endif %}
+                        <li class="nav-item"><a class="nav-link btn btn-outline-light mx-2" href="{{ url_for('user_bp.logout') }}">Logout</a></li>
                     {% else %}
-                        <li class="nav-item"><a class="nav-link btn btn-outline-light mx-2" href="{{ url_for('main.login') }}">Login</a></li>
-                        <li class="nav-item"><a class="nav-link btn btn-outline-light mx-2" href="{{ url_for('main.register') }}">Register</a></li>
+                        <li class="nav-item"><a class="nav-link btn btn-outline-light mx-2" href="{{ url_for('user_bp.login') }}">Login</a></li>
+                        <li class="nav-item"><a class="nav-link btn btn-outline-light mx-2" href="{{ url_for('user_bp.register') }}">Register</a></li>
                     {% endif %}
                 </ul>
             </div>
         </div>
     </nav>
+    <div class="block-no-background"> 
+        <div class="container mt-4">
+            {% block content %}{% endblock %}
+            </div>
 
-    <div class="container mt-4">
-        {% with messages = get_flashed_messages(with_categories=true) %}
-            {% if messages %}
-                {% for category, message in messages %}
-                    <div class="alert alert-{{ category }} alert-dismissible fade show shadow auto-dismiss" role="alert">
-                        {{ message }}
-                        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+            <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+            
+            {% with messages = get_flashed_messages(with_categories=True) %}
+                {% if messages %}
+                    <div id="flash-container">
+                        {% for category, message in messages %}
+                            <div class="flash-message alert alert-{{ category }}">
+                                {{ message }}
+                            </div>
+                        {% endfor %}
                     </div>
-                {% endfor %}
-            {% endif %}
-        {% endwith %}
-        {% block content %}{% endblock %}
+                {% endif %}
+            {% endwith %}
     </div>
-
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     
-    <script>
-        // Auto dismiss alerts after 3 seconds
-        document.addEventListener('DOMContentLoaded', function() {
-            const alerts = document.querySelectorAll('.alert.auto-dismiss');
-            alerts.forEach(function(alert) {
-                setTimeout(function() {
-                    const bsAlert = new bootstrap.Alert(alert);
-                    bsAlert.close();
-                }, 2000);
-                <!-- set thông báo chỉ xuất hiện sau 2s rồi biến mất  -->
-            });
-        });
-    </script>
+    <script src="{{ url_for('static', filename='js/script.js') }}"></script>
+
 </body>
+<!-- Thêm đoạn này vào cuối file, trước thẻ </body> -->
+{% if current_user.is_authenticated %}
+<div style="position: fixed; bottom: 20px; right: 20px;">
+    <a href="{{ url_for('user_bp.change_password') }}" class="btn btn-primary">
+        <i class="fas fa-key"></i> Đổi mật khẩu
+    </a>
+</div>
+{% endif %}
 </html>

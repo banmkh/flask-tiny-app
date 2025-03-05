@@ -34,28 +34,36 @@ def get_user_by_username(username):
     user = db.execute("SELECT * FROM users WHERE username = ?", (username,)).fetchone()
     return dict(user) if user != None else None
 
-def get_user_by_id(id):
+def get_user_by_id(user_id):
     db = get_db()
-    user = db.execute("SELECT * FROM users WHERE id = ?", (id,)).fetchone()
-    return dict(user) if user != None else None
+    user = db.execute("SELECT * FROM users WHERE id = ?", (user_id,)).fetchone()
+    return user if user else None
 
 # thêm 1 bài viết mới
-def add_post(title, content, user_id):
+def add_post(title, content, username):
     """Thêm bài viết mới vào database"""
     db = get_db()
     db.execute(
-        "INSERT INTO posts (title, content, user_id, date_posted) VALUES (?, ?, ?, ?)",
-        (title, content, user_id, datetime.utcnow()),  # ✅ Thêm `date_posted` bằng Python
+        "INSERT INTO posts (title, content, username, date_posted) VALUES (?, ?, ?, ?)",
+        (title, content, username, datetime.utcnow()),  # ✅ Thêm `date_posted` bằng Python
     )
     db.commit()
 
 def get_post_by_id(id):
     db = get_db()
     post = db.execute("""
-        SELECT posts.id, posts.title, posts.content, posts.date_posted, users.username AS author
+        SELECT id, title, content, date_posted,username
         FROM posts
-        JOIN users ON posts.user_id = users.id
-        WHERE posts.id = ?
+        WHERE id = ?
     """, (id,)).fetchone()
     return post
+
+def ban_and_un_ban_user(ban_user,unban_user):
+    db = get_db()
+    for user in ban_user:
+        db.execute("UPDATE users SET is_ban = 1 WHERE id = ?",(ban_user["id"],))
+    for user in unban_user:
+        db.execute("UPDATE users SET is_ban = 0 WHERE id = ?",(ban_user["id"],))
+    db.commit()
+    return True
 

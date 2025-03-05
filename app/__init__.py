@@ -1,7 +1,7 @@
 from flask import Flask
 from app.db import get_db, close_db,get_user_by_id
 from flask_login import LoginManager
-from app.routes import User
+from app.routes_account import User
 
 # login_manager = LoginManager()
 def create_app():
@@ -16,9 +16,13 @@ def create_app():
     # cấu hình login
     @login_manager.user_loader
     def load_user(user_id):
-        user =  get_user_by_id(user_id)
-        return User(user['id'],user['username'],user['email'])
+        user = db.get_user_by_id(user_id)
+        if user is None:
+            return None
+        return User(user['id'], user['username'], user['email'], user['is_admin'], user['is_ban'])
 
-    from app.routes import main
-    app.register_blueprint(main)
+    from app.routes_account import user_bp
+    from app.routes_post import post_bp
+    app.register_blueprint(post_bp)
+    app.register_blueprint(user_bp)
     return app

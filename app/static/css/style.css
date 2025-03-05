@@ -1,0 +1,121 @@
+body {
+    background-color: #cfd1d2; /* Xám nhạt */
+    color: #333333; /* Xám đậm cho chữ */
+}
+.block-no-background {
+    background-color: #ffffff;
+    border-radius: 10px; /* Bo tròn góc */
+    border-color: #0056B3; 
+    padding: 20px; /* Khoảng cách bên trong */
+    margin: 10px auto; /* Canh giữa theo chiều ngang */
+    width: 80%; /* Chiếm 80% chiều ngang màn hình */
+    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1); /* Bóng đổ nhẹ */
+    border: 1px solid #d1d5d5e7; /* Viền nhẹ */
+}
+.mb-3{
+    border-radius: 10px;
+    border-color: #007BFF ;
+}
+.card-body{
+    border-radius: 10px;
+    border: 1px ;
+    overflow: hidden;
+    background-color: #F8F9FA ;
+}
+
+.navbar {
+    padding: 1rem 0;
+}
+.navbar-brand {
+    font-size: 1.8rem;
+    font-weight: bold;
+}
+.nav-link {
+    font-size: 1.2rem;
+    padding: 0.5rem 1rem !important;
+}
+.btn-write-post {
+    font-size: 1.2rem;
+    padding: 0.5rem 1.5rem;
+    font-weight: 600;
+}
+.alert {
+    font-size: 1.2rem;
+    padding: 1rem 1.5rem;
+}
+.container {
+    max-width: 1200px;
+}     
+.nav-link.btn-outline-light:hover {
+    background-color: #fff !important;
+    color: #212529 !important;
+}
+.btn-write-post:hover {
+    background-color: #198754 !important;
+    border-color: #198754 !important;
+    color: #fff !important;
+}
+.post-preview {
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    max-height: 3em; /* Điều chỉnh chiều cao để phù hợp với font-size */
+}
+.container_ad_usr{
+    flex: 1; /* Chia đều hai phần */
+    display: flex;
+    gap : 50px;
+    align-items: stretch;
+    justify-content: center;
+    font-size: 24px;
+    color: rgb(57, 35, 35);
+}
+.contact-container {
+    background: white;
+    padding: 30px;
+    border-radius: 10px;
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+    text-align: center;
+}
+.info-section {
+    background: #17a2b8;
+    color: white;
+    padding: 20px;
+    margin-top: 20px;
+    border-radius: 10px;
+}
+.info-icon {
+    font-size: 30px;
+}
+
+#flash-container {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    z-index: 1000;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+}
+.flash-message {
+    min-width: 250px;
+    padding: 10px 20px;
+    border-radius: 5px;
+    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+    margin-bottom: 10px;
+    opacity: 1;
+    transition: opacity 0.5s ease-in-out;
+}
+.alert-success { background-color: #28a745; color: white; }
+.alert-danger { background-color: #dc3545; color: white; }
+.alert-warning { background-color: #ffc107; color: black; }
+.alert-info { background-color: #17a2b8; color: white; }
+
+.hidden-checkbox {
+    display: none;
+}
+.hidden-checkbox:checked + .card-body {
+    background-color: #a3c6fe;
+}

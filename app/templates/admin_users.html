@@ -1,0 +1,81 @@
+{% extends "base.html" %}
+
+{% block title %}Quản lý người dùng{% endblock %}
+
+{% block content %}
+<div class="container mt-4">
+    <h2>Quản lý người dùng</h2>
+    
+    <div class="card mb-4">
+        <div class="card-header bg-success text-white">
+            <h4>Danh sách người dùng đang hoạt động</h4>
+        </div>
+        <div class="card-body">
+            <form method="POST" action="{{ url_for('user_bp.toggle_ban') }}">
+                <table class="table table-striped">
+                    <thead>
+                        <tr>
+                            <th>Chọn</th>
+                            <th>Username</th>
+                            <th>Email</th>
+                            <th>Thao tác</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for user in users_is_not_ban %}
+                        <tr>
+                            <td>
+                                <input type="checkbox" name="ban_user" value="{{ user.id }}">
+                            </td>
+                            <td>{{ user.username }}</td>
+                            <td>{{ user.email }}</td>
+                            <td>
+                                <a href="{{ url_for('user_bp.user_detail', user_id=user.id) }}" class="btn btn-info btn-sm">Chi tiết</a>
+                                <a href="{{ url_for('user_bp.reset_password', user_id=user.id) }}" class="btn btn-warning btn-sm">Đặt lại mật khẩu</a>
+                            </td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+                <button type="submit" class="btn btn-danger">Khóa tài khoản đã chọn</button>
+            </form>
+        </div>
+    </div>
+    
+    <div class="card">
+        <div class="card-header bg-danger text-white">
+            <h4>Danh sách người dùng bị khóa</h4>
+        </div>
+        <div class="card-body">
+            <form method="POST" action="{{ url_for('user_bp.toggle_ban') }}">
+                <table class="table table-striped">
+                    <thead>
+                        <tr>
+                            <th>Chọn</th>
+                            <th>Username</th>
+                            <th>Email</th>
+                            <th>Thao tác</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for user in users_is_ban %}
+                        <tr>
+                            <td>
+                                <input type="checkbox" name="un_ban_user" value="{{ user.id }}">
+                            </td>
+                            <td>{{ user.username }}</td>
+                            <td>{{ user.email }}</td>
+                            <td>
+                                <a href="{{ url_for('user_bp.user_detail', user_id=user.id) }}" class="btn btn-info btn-sm">Chi tiết</a>
+                                <a href="{{ url_for('user_bp.reset_password', user_id=user.id) }}" class="btn btn-warning btn-sm">Đặt lại mật khẩu</a>
+                            </td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+                <button type="submit" class="btn btn-success">Mở khóa tài khoản đã chọn</button>
+            </form>
+        </div>
+    </div>
+</div>
+{% endblock %}
