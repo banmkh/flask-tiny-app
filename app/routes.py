@@ -162,7 +162,6 @@ def edit_post(post_id):
             
     return render_template("edit_post.html", post=post, current_user=current_user)
 
-<<<<<<< HEAD
 # Chức năng yêu cầu reset mật khẩu
 @main.route("/reset_password", methods=["GET", "POST"])
 def reset_password_request():
@@ -177,7 +176,7 @@ def reset_password_request():
             flash("Email không tồn tại trong hệ thống!", "danger")
             return render_template("reset_password_request.html")
             
-        # Đặt mật khẩu mặc định là "1111"
+        # Đặt mật khẩu mặc định là 1111
         db = get_db()
         db.execute(
             "UPDATE users SET password = ? WHERE id = ?",
@@ -189,33 +188,3 @@ def reset_password_request():
         return redirect(url_for('main.login'))
         
     return render_template("reset_password_request.html")
-=======
-# Chức năng thông báo khi tài khoản bị cấm
-@main.route("/ban")
-def ban(is_ban = 0):
-    if is_ban == 1:
-        return render_template("ban.html")
-    else:
-        flash("Tài khoản của bạn không thuộc diện bị cấm","danger")
-        return redirect(url_for("main.home"))
-
-@main.route("/admin/toggle-ban",methods = ["POST"])
-@login_required
-def toggle_ban():
-    if not current_user.is_admin:
-        flash("Bạn không có quyền thực hiện thao tác này!", "danger")
-        return redirect(url_for("main.admin_users"))
-
-    selecteds = request.form.getlist("ban_user")
-    print(selecteds)
-    for id in selecteds:
-        db = get_db()
-        db.execute("UPDATE users SET is_ban = 1 WHERE id = ?", (id,))
-    selecteds = request.form.getlist("un_ban_user")
-    for id in selecteds:
-        db = get_db()
-        db.execute("UPDATE users SET is_ban = 0 WHERE id = ?", (id,))
-    db.commit()
-    flash("Cập nhật trạng thái thành công!", "success")
-    return redirect(url_for("main.admin_users"))
->>>>>>> 846cb19310e14ef7d11de192f25cd43e22573406
