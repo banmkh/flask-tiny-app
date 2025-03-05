@@ -10,10 +10,10 @@
             <div class="card-body">
                 <h5 class="card-title">{{ post.title }}</h5>
                 <h6 class="card-subtitle text-muted">
-                    By {{ post.author }} on {{ post.date_posted }}
+                    By {{ post.username }} on {{ post.date_posted }}
                 </h6>
-                <p class="card-text mt-2">
-                    {{ post.content[:200] }}...
+                <p class="post-preview">
+                    {{ post.content|replace('\n', '<br>') | safe }}...
                 </p>
                 <a href="{{ url_for('main.post_detail', post_id=post.id) }}" class="btn btn-primary">Đọc tiếp</a>
             </div>

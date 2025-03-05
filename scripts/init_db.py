@@ -8,17 +8,27 @@ TABLES = {
             id INTEGER PRIMARY KEY AUTOINCREMENT,
             username TEXT UNIQUE NOT NULL,
             email TEXT UNIQUE NOT NULL,
-            password TEXT NOT NULL
+            password TEXT NOT NULL,
+            is_admin INTEGER DEFAULT 0,
+            is_ban INTEGER DEFAULT 0
         );
+    """,
+    "is_admin_feature": """
+        ALTER TABLE users ADD COLUMN is_admin INTEGER DEFAULT 0;
+    """,
+    "is_ban_feature":"""
+        ALTER TABLE users ADD COLUMN is_ban INTEGER DEFAULT 0;
+    """,
+    "author_feature":"""
+        ALTER TABLE posts ADD COLUMN username TEXT;
     """,
     "posts": """
         CREATE TABLE IF NOT EXISTS posts (
             id INTEGER PRIMARY KEY AUTOINCREMENT,
             title TEXT NOT NULL,
             content TEXT NOT NULL,
-            user_id INTEGER NOT NULL,
-            date_posted TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-            FOREIGN KEY (user_id) REFERENCES users(id) ON DELETE CASCADE
+            username TEXT,
+            date_posted TIMESTAMP DEFAULT CURRENT_TIMESTAMP
         );
     """,
     "comments": """
@@ -37,8 +47,11 @@ TABLES = {
 def init_db():
     conn = sqlite3.connect(DATABASE)
     cursor = conn.cursor()
-    for table, query in TABLES.items():
-        cursor.execute(query)
+    for table_or_feature_name, query in TABLES.items():
+        try:
+            cursor.execute(query)
+        except:
+            print(f"{table_or_feature_name} đã tồn tại!!!")
     conn.commit()
     conn.close()
     print("Database initialized successfully!")

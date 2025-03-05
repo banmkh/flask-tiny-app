@@ -1,0 +1,77 @@
+body {
+    font-size: 1.1rem;
+}
+.navbar {
+    padding: 1rem 0;
+}
+.navbar-brand {
+    font-size: 1.8rem;
+    font-weight: bold;
+}
+.nav-link {
+    font-size: 1.2rem;
+    padding: 0.5rem 1rem !important;
+}
+.btn-write-post {
+    font-size: 1.2rem;
+    padding: 0.5rem 1.5rem;
+    font-weight: 600;
+}
+.alert {
+    font-size: 1.2rem;
+    padding: 1rem 1.5rem;
+}
+.container {
+    max-width: 1200px;
+}     
+.nav-link.btn-outline-light:hover {
+    background-color: #fff !important;
+    color: #212529 !important;
+}
+.btn-write-post:hover {
+    background-color: #198754 !important;
+    border-color: #198754 !important;
+    color: #fff !important;
+}
+.post-preview {
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    max-height: 3em; /* Điều chỉnh chiều cao để phù hợp với font-size */
+}
+.container_ad_usr{
+    flex: 1; /* Chia đều hai phần */
+    display: flex;
+    gap : 50px;
+    align-items: stretch;
+    justify-content: center;
+    font-size: 24px;
+    color: rgb(57, 35, 35);
+}
+
+
+#flash-container {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    z-index: 1000;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+}
+.flash-message {
+    min-width: 250px;
+    padding: 10px 20px;
+    border-radius: 5px;
+    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+    margin-bottom: 10px;
+    opacity: 1;
+    transition: opacity 0.5s ease-in-out;
+}
+.alert-success { background-color: #28a745; color: white; }
+.alert-danger { background-color: #dc3545; color: white; }
+.alert-warning { background-color: #ffc107; color: black; }
+.alert-info { background-color: #17a2b8; color: white; }
+
