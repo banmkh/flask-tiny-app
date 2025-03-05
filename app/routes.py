@@ -1,6 +1,8 @@
 from flask import Blueprint, render_template,request,redirect,url_for,flash
 from flask_login import login_user, logout_user, UserMixin,current_user,login_required
 from app.db import get_db, add_user, get_user_by_email, get_user_by_username,get_user_by_id, add_post, get_post_by_id
+import secrets
+from datetime import datetime, timedelta
 
 main = Blueprint("main", __name__)
 
@@ -122,3 +124,30 @@ def edit_post(post_id):
             return redirect(url_for("main.post_detail", post_id=post_id))
             
     return render_template("edit_post.html", post=post, current_user=current_user)
+
+# Chức năng yêu cầu reset mật khẩu
+@main.route("/reset_password", methods=["GET", "POST"])
+def reset_password_request():
+    if current_user.is_authenticated:
+        return redirect(url_for('main.home'))
+        
+    if request.method == "POST":
+        email = request.form["email"]
+        user = get_user_by_email(email)
+        
+        if not user:
+            flash("Email không tồn tại trong hệ thống!", "danger")
+            return render_template("reset_password_request.html")
+            
+        # Đặt mật khẩu mặc định là "1111"
+        db = get_db()
+        db.execute(
+            "UPDATE users SET password = ? WHERE id = ?",
+            ("1111", user["id"])
+        )
+        db.commit()
+        
+        flash("Mật khẩu đã được reset thành '1111'. Vui lòng đăng nhập với mật khẩu mới.", "success")
+        return redirect(url_for('main.login'))
+        
+    return render_template("reset_password_request.html")
