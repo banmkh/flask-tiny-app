@@ -15,8 +15,7 @@ def home():
     total_posts = db.execute("SELECT COUNT(*) FROM posts").fetchone()[0]
     total_pages = (total_posts + per_page - 1) // per_page 
     posts = db.execute(
-        "SELECT * FROM posts ORDER BY date_posted DESC LIMIT ? OFFSET ?",
-        (per_page, (page - 1) * per_page)
+        "SELECT * FROM posts ORDER BY date_posted DESC"
     ).fetchall()
     return render_template("index.html", posts=posts,per_page = per_page,page = page,total_pages=total_pages,current_user = current_user)
 
@@ -98,8 +97,7 @@ def posts_management():
     total_posts = db.execute("SELECT COUNT(*) FROM posts where username = ?",(current_user.username,)).fetchone()[0]
     total_pages = (total_posts + per_page - 1) // per_page 
     posts = db.execute(
-        "SELECT * FROM posts WHERE username = ? ORDER BY date_posted DESC LIMIT ? OFFSET ?",
-        (current_user.username,per_page, (page - 1) * per_page)
+        "SELECT * FROM posts WHERE username = ? ",(current_user.username,)
     ).fetchall()
 
     posts_del_id = request.args.getlist("delete_post")
