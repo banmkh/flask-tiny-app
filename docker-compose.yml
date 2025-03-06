@@ -1,0 +1,18 @@
+version: '3.8'
+
+services:
+  db_init:
+    build: .
+    command: sh -c "rm -f blog.db && python scripts/init_db.py && python scripts/simulate_data.py"
+    volumes:
+      - ./blog.db:/app/blog.db
+
+  flask_app:
+    build: .
+    ports:
+      - "5000:5000"
+    depends_on:
+      - db_init
+    command: python manage.py
+    volumes:
+      - ./blog.db:/app/blog.db
