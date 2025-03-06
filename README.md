@@ -49,8 +49,27 @@ chmod +x install.sh
 ```
 ---
 
+### **Sử dụng Docker để triển khai ứng dụng**
+#### **1. Build Docker Image**
+```bash
+docker build -t flask-tiny-app .
+```
+
+#### **2. Chạy Container**
+```bash
+docker run -p 5000:5000 flask-tiny-app
+```
+
+#### **3. Hoặc sử dụng Docker Compose**
+```bash
+docker-compose up --build
+```
+
+#### **4. Truy cập ứng dụng**
+👉 **http://localhost:5000**
+
 ## 5. Ghi chú
 - Nếu số lượng bài viết ít hơn số giới hạn trên mỗi trang, thanh phân trang sẽ không hiển thị.
 - Chỉ chủ sở hữu bài viết mới có thể thực hiện thao tác xóa bài viết.
 - Tính năng phân trang giúp load dữ liệu nhanh hơn và dễ dàng quản lý bài viết.
-
+---
