@@ -28,7 +28,6 @@
                 </ul>
                 <ul class="navbar-nav">
                     {% if current_user.is_authenticated %}
-                    <li class = "nav-item"> <a class="nav-link btn btn-outline-light mx-2" href="{{ url_for('post_bp.posts_management') }}">Quản lý bài viết</a></li>
                         {% if current_user.is_admin %}
                             <li class = "nav-item"> <a class="nav-link btn btn-outline-light mx-2" href="{{ url_for('user_bp.admin_users') }}">Quản lý user</a></li>
                         {% endif %}

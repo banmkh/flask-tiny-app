@@ -86,30 +86,3 @@ def edit_post(post_id):
             
     return render_template("edit_post.html", post=post, current_user=current_user)
 
-# quản lý bài viết
-@post_bp.route("/posts-management",methods = ["POST","GET"])
-@login_required
-def posts_management():
-
-    page = request.args.get("page", 1, type=int)
-    per_page = request.args.get("per_page", 2, type=int)
-
-    db = get_db()
-    total_posts = db.execute("SELECT COUNT(*) FROM posts where username = ?",(current_user.username,)).fetchone()[0]
-    total_pages = (total_posts + per_page - 1) // per_page 
-    posts = db.execute(
-        "SELECT * FROM posts WHERE username = ? ORDER BY date_posted DESC LIMIT ? OFFSET ?",
-        (current_user.username,per_page, (page - 1) * per_page)
-    ).fetchall()
-
-    posts_del_id = request.args.getlist("delete_post")
-    for id in posts_del_id:
-        post = db.execute("SELECT * FROM posts WHERE id = ? AND username = ?", (id, current_user.username)).fetchone()
-        if not post:
-            flash("Bài viết không tồn tại hoặc bạn không có quyền xóa!", "danger")
-            continue
-        
-        db.execute("DELETE FROM posts WHERE id = ?", (id,))
-        db.commit()
-        flash("Bài viết đã được xóa thành công!", "success")
-    return render_template("posts_management.html",per_page = per_page,posts = posts,page = page,total_pages = total_pages,current_user = current_user)
