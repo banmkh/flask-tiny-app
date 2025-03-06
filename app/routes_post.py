@@ -3,13 +3,13 @@ from flask_login import login_user, logout_user, UserMixin,current_user,login_re
 from app.db import get_db, add_user, get_user_by_email, get_user_by_username,get_user_by_id, add_post, get_post_by_id
 from app.routes_account import User
 post_bp = Blueprint("post_bp", __name__)
-
+from datetime import datetime
 # trang chủ
 @post_bp.route("/")
 def home():
 
     page = request.args.get("page", 1, type=int)
-    per_page = request.args.get("per_page", 2, type=int)
+    per_page = request.args.get("per_page", 10, type=int)
 
     db = get_db()
     total_posts = db.execute("SELECT COUNT(*) FROM posts").fetchone()[0]
@@ -92,7 +92,7 @@ def edit_post(post_id):
 def posts_management():
 
     page = request.args.get("page", 1, type=int)
-    per_page = request.args.get("per_page", 2, type=int)
+    per_page = request.args.get("per_page", 10, type=int)
 
     db = get_db()
     total_posts = db.execute("SELECT COUNT(*) FROM posts where username = ?",(current_user.username,)).fetchone()[0]

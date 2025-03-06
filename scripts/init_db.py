@@ -52,7 +52,12 @@ def init_db():
             cursor.execute(query)
         except:
             print(f"{table_or_feature_name} đã tồn tại!!!")
+    
     conn.commit()
+    if conn.execute("SELECT count(*) FROM users WHERE is_admin == 1").fetchall() == 0:
+        conn.execute(
+            "INSERT INTO users (username, email, password, is_admin) VALUES (?, ?, ?, ?)",
+            ("admin", "admin@example.com", "1234", 1))
     conn.close()
     print("Database initialized successfully!")
 
