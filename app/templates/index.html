@@ -5,14 +5,6 @@
 {% block content %}
     <div class="container">
         <h1 class="mb-4">Bài viết gần đây</h1>
-        <form method="GET" action="{{ url_for('post_bp.home') }}" class="mb-3">
-            <label for="per_page">Số bài viết mỗi trang:</label>
-            <select name="per_page" id="per_page" onchange="this.form.submit()">
-                <option value="2" {% if per_page == 2 %}selected{% endif %}>2</option>
-                <option value="4" {% if per_page == 4 %}selected{% endif %}>4</option>
-                <option value="8" {% if per_page == 8 %}selected{% endif %}>8</option>
-            </select>
-        </form>
         <div class="row">
             {% for post in posts %}
                 <div class="col-md-6">

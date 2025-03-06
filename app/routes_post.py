@@ -15,8 +15,7 @@ def home():
     total_posts = db.execute("SELECT COUNT(*) FROM posts").fetchone()[0]
     total_pages = (total_posts + per_page - 1) // per_page 
     posts = db.execute(
-        "SELECT * FROM posts ORDER BY date_posted DESC LIMIT ? OFFSET ?",
-        (per_page, (page - 1) * per_page)
+        "SELECT * FROM posts ORDER BY date_posted"
     ).fetchall()
     return render_template("index.html", posts=posts,per_page = per_page,page = page,total_pages=total_pages,current_user = current_user)
 
