@@ -77,7 +77,7 @@ def contact():
     return render_template("contact.html")
 
 # thêm chức năng quản lý user của admin
-@user_bp.route("/admin/users",methods = ["POST","GET"])
+@user_bp.route("/admin/users", methods=["POST", "GET"])
 @login_required
 def admin_users():
     if not current_user.is_authenticated or not current_user.is_admin:
