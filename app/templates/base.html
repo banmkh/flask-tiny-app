@@ -64,4 +64,12 @@
     <script src="{{ url_for('static', filename='js/script.js') }}"></script>
 
 </body>
+<!-- Thêm đoạn này vào cuối file, trước thẻ </body> -->
+{% if current_user.is_authenticated %}
+<div style="position: fixed; bottom: 20px; right: 20px;">
+    <a href="{{ url_for('user_bp.change_password') }}" class="btn btn-primary">
+        <i class="fas fa-key"></i> Đổi mật khẩu
+    </a>
+</div>
+{% endif %}
 </html>

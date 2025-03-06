@@ -34,10 +34,10 @@ def get_user_by_username(username):
     user = db.execute("SELECT * FROM users WHERE username = ?", (username,)).fetchone()
     return dict(user) if user != None else None
 
-def get_user_by_id(id):
+def get_user_by_id(user_id):
     db = get_db()
-    user = db.execute("SELECT * FROM users WHERE id = ?", (id,)).fetchone()
-    return dict(user) if user != None else None
+    user = db.execute("SELECT * FROM users WHERE id = ?", (user_id,)).fetchone()
+    return user if user else None
 
 # thêm 1 bài viết mới
 def add_post(title, content, username):

@@ -16,7 +16,6 @@ Flask Tiny App là một blog app nhỏ gọn, sử dụng Flask để xây dự
  - Hỗ trợ phân trang: Chia danh sách bài viết theo trang.
  - Xóa nhiều bài viết cùng lúc.
  - Triển khai Docker: Dễ dàng deploy bằng Docker.
- - Xóa nhiều bài viết cùng lúc.
- - Triển khai Docker: Dễ dàng deploy bằng Docker.
+   
 ### 3. Hướng dẫn cài đặt và chạy
 

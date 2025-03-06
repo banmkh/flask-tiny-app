@@ -16,8 +16,10 @@ def create_app():
     # cấu hình login
     @login_manager.user_loader
     def load_user(user_id):
-        user =  get_user_by_id(user_id)
-        return User(user['id'],user['username'],user['email'],user['is_admin'],user['is_ban'])
+        user = get_user_by_id(user_id)
+        if user is None:
+            return None
+        return User(user['id'], user['username'], user['email'], user['is_admin'], user['is_ban'])
 
     from app.routes_account import user_bp
     from app.routes_post import post_bp
