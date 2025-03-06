@@ -11,3 +11,4 @@ logs/
 .env.local
 *.dockerfile
 docker-compose.override.yml
+blog.db
