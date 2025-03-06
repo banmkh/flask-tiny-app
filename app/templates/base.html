@@ -32,7 +32,7 @@
                         {% if current_user.is_admin %}
                             <li class = "nav-item"> <a class="nav-link btn btn-outline-light mx-2" href="{{ url_for('user_bp.admin_users') }}">Quản lý user</a></li>
                         {% endif %}
-                        <li class="nav-item"><a class="nav-link btn btn-outline-light mx-2" href="{{ url_for('user_bp.logout') }}">Logout</a></li>
+                        <li class="nav-item"><a class="nav-link btn btn-outline-light mx-2" href="{{ url_for('user_bp.logout') }}">Đăng xuất</a></li>
                     {% else %}
                         <li class="nav-item"><a class="nav-link btn btn-outline-light mx-2" href="{{ url_for('user_bp.login') }}">Login</a></li>
                         <li class="nav-item"><a class="nav-link btn btn-outline-light mx-2" href="{{ url_for('user_bp.register') }}">Register</a></li>
