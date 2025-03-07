@@ -125,15 +125,3 @@ body {
     max-height: 4.5em; /* 3 lines * 1.5em line-height */
     transition: max-height 0.3s ease;
 }
-
-.post-preview:hover {
-    max-height: none;
-    -webkit-line-clamp: unset;
-}
-
-/* hiệu ứng re chuột */
-.card:hover {
-    transform: translateY(-5px);
-    transition: transform 0.2s ease;
-    box-shadow: 0 4px 15px rgba(0,0,0,0.1);
-}
