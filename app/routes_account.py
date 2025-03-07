@@ -30,10 +30,10 @@ def register():
 
         if get_user_by_email(email):
             flash('email đã tồn tại!',"danger")
-            redirect(url_for("register.html"))
+            return redirect(url_for("user_bp.register"))  # Fixed endpoint
         elif get_user_by_username(username):
             flash('username đã tồn tại!',"danger")
-            redirect(url_for("register.html"))
+            return redirect(url_for("user_bp.register"))  # Fixed endpoint
         else:
             flash("Đăng ký thành công!", "success")
             add_user(username,email,password)
